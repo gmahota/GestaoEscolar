@@ -1,0 +1,25 @@
+﻿@model GestaoEscolar.Models.Nivel
+
+@{
+    ViewData["Title"] = "Detalhes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detalhes</h2>
+
+<div>
+    <h4>Nivel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.desc)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.desc)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.codigo">Editar</a> |
+    <a asp-action="Index">Voltar a Lista</a>
+</div>
