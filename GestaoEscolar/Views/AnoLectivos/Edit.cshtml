@@ -1,0 +1,52 @@
+﻿@model GestaoEscolar.Models.AnoLectivo
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edição</h2>
+
+<h4>AnoLectivo</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="id" />
+            <div class="form-group">
+                <label asp-for="codigo" class="control-label"></label>
+                <input asp-for="codigo" class="form-control" />
+                <span asp-validation-for="codigo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="desc" class="control-label"></label>
+                <input asp-for="desc" class="form-control" />
+                <span asp-validation-for="desc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="anoId" class="control-label"></label>
+                <select asp-for="anoId" class="form-control" asp-items="ViewBag.anoId"></select>
+                <span asp-validation-for="anoId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="dataInicio" class="control-label"></label>
+                <input asp-for="dataInicio" class="form-control" />
+                <span asp-validation-for="dataInicio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="dataFim" class="control-label"></label>
+                <input asp-for="dataFim" class="form-control" />
+                <span asp-validation-for="dataFim" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Gravar" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Voltar a Listagem</a>
+</div>
+

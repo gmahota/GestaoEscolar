@@ -1,0 +1,83 @@
+﻿@model IEnumerable<GestaoEscolar.Models.Aluno>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3 class="header">Lista de Alunos</h3>
+
+<p>
+    <a asp-action="Create" class="waves-effect waves-light btn "><i class="material-icons left">add</i>Novo</a>
+
+    <div class="input-field col s6">
+        <input id="input_text" type="text" data-length="20">
+        <label for="input_text">Filtro Aluno</label>
+    </div>
+
+</p>
+<table class="">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.codigo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nome)
+            </th>
+            
+            
+            <th>
+                @Html.DisplayNameFor(model => model.telefone)
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.dataNascimento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nomeEncarregado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.telefoneEncarregado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.emailEncarregado)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.codigo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nome)
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.telefone)
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.dataNascimento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nomeEncarregado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.telefoneEncarregado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.emailEncarregado)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.id"><i class="material-icons left">mode_edit</i></a> 
+                <a asp-action="Details" asp-route-id="@item.id"> <i class="material-icons left">chrome_reader_mode</i></a> 
+                <a asp-action="Delete" asp-route-id="@item.id" red><i class="material-icons left">delete</i></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

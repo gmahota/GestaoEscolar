@@ -32,9 +32,9 @@
                 @Html.DisplayFor(modelItem => item.classe.id)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.id"><i class="material-icons left">mode_edit</i></a>
+                <a asp-action="Details" asp-route-id="@item.id"> <i class="material-icons left">chrome_reader_mode</i></a>
+                <a asp-action="Delete" asp-route-id="@item.id" red><i class="material-icons left">delete</i></a>
             </td>
         </tr>
 }

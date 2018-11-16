@@ -28,5 +28,13 @@ namespace GestaoEscolar.Data
         public DbSet<GestaoEscolar.Models.Classe> Classe { get; set; }
 
         public DbSet<GestaoEscolar.Models.Disciplina> Disciplina { get; set; }
+
+        public DbSet<GestaoEscolar.Models.Anos> Anos { get; set; }
+
+        public DbSet<GestaoEscolar.Models.AnoLectivo> AnoLectivo { get; set; }
+
+        public DbSet<GestaoEscolar.Models.Turmas> Turmas { get; set; }
+
+        public DbSet<GestaoEscolar.Models.Aluno> Aluno { get; set; }
     }
 }

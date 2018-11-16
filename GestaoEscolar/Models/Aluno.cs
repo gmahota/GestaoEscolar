@@ -8,13 +8,65 @@ using System.Threading.Tasks;
 namespace GestaoEscolar.Models
 {
     #region Definições Academicas
+
+    public partial class Anos
+    {
+        [Key]
+        public int id { get; set; }
+
+        [Display(Name = "Ano")]
+        public int ano { get; set; }
+
+        [Display(Name = "Descrição")]
+        [StringLength(20)]
+        public string desc { get; set; }
+
+        [Display(Name = "Estado")]
+        [StringLength(20)]
+        public string estado { get; set; }
+
+        public DateTime inicio { get; set; }
+        public DateTime fim { get; set; }
+
+        public IList<AnoLectivo> AnoLectivo { get; set; }
+
+    }
+
+    public partial class AnoLectivo
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int id { get; set; }
+
+        [Display(Name = "Codigo")]
+        [StringLength(20)]
+        public string codigo { get; set; }
+
+        [Display(Name = "Descrição")]
+        [StringLength(20)]
+        public string desc { get; set; }
+
+        [Display(Name = "Ano")]
+        public int anoId { get; set; }
+
+        [Display(Name = "Data de Inicio")]
+        public DateTime dataInicio { get; set; }
+
+        [Display(Name = "Data de Fim")]
+        public DateTime dataFim { get; set; }
+        
+        [ForeignKey("anoId")]
+        [Display(Name = "Ano")]
+        public virtual Anos Ano { get; set; }
+        
+        //public virtual Classe Classe { get; set; }
+        //public virtual ICollection<Turmas> Turmas { get; set; }
+        //public virtual ICollection<AlunoAnoLectivo> AlunoAnoLectivo { get; set; }
+
+    }
+
     public partial class Classe
     {
-        public Classe()
-        {
-
-        }
-
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
@@ -65,46 +117,10 @@ namespace GestaoEscolar.Models
         [Display(Name = "Classe")]
         public virtual Classe classe { get; set; }
     }
-    #endregion
-    public class Aluno
-    {
-        public decimal id { get; set; }
-
-        public string codigo { get; set; }
-
-        public string nome { get; set; }
-
-        public string morada { get; set; }
-
-        public string telefone { get; set; }
-
-        public string celular { get; set; }
-
-        public DateTime dataAniversario { get; set; }
-
-        public string localNascimento { get; set; }
-
-        public bool sexo { get; set; }
-
-        public virtual ICollection<AlunoAnoLectivo> AlunoAnoLectivo { get; set; }
-
-    }
-
-    public partial class AlunoAnoLectivo
-    {
-        public int id { get; set; }
-        public decimal Id_Aluno { get; set; }
-        public decimal Id_AnoLectivo { get; set; }
-        public Nullable<decimal> Id_Turma { get; set; }
-
-        public virtual AnoLectivo AnoLectivo { get; set; }
-        public virtual Aluno Aluno { get; set; }
-        public virtual Turmas Turmas { get; set; }
-    }
 
     public partial class Turmas
     {
-        
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
@@ -116,53 +132,134 @@ namespace GestaoEscolar.Models
         [Display(Name = "Classe")]
         public int classeId { get; set; }
 
-        public Nullable<int> AnoLectivoId { get; set; }
-        public Nullable<int> HorarioId { get; set; }
-
-        //public virtual IList<AlunoAnoLectivo> AlunoAnoLectivo { get; set; }
-        //public virtual AnoLectivo AnoLectivo { get; set; }
-        //public virtual TabelaHorarios TabelaHorarios { get; set; }
-
-        [ForeignKey ("classeId")]
+        [ForeignKey("classeId")]
         [Display(Name = "Classe")]
         public virtual Classe Classe { get; set; }
     }
-
-    public partial class AnoLectivo
+    #endregion
+    public class Aluno
     {
-        public AnoLectivo()
-        {
-            this.AlunoAnoLectivo = new HashSet<AlunoAnoLectivo>();
-            this.Turmas = new HashSet<Turmas>();
-        }
-
-        public decimal ID { get; set; }
-        public Nullable<decimal> Ano_Id { get; set; }
-        public Nullable<decimal> Classe_Id { get; set; }
-
-        public virtual ICollection<AlunoAnoLectivo> AlunoAnoLectivo { get; set; }
-        public virtual Anos Anos { get; set; }
-        public virtual Classe Classe { get; set; }
-        public virtual ICollection<Turmas> Turmas { get; set; }
-    }
-
-    public partial class Anos
-    {
-        public Anos()
-        {
-            this.Aluno_Efectividade = new HashSet<Aluno_Efectividade>();
-            this.AnoLectivo = new HashSet<AnoLectivo>();
-        }
-
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
-        public Nullable<decimal> ano { get; set; }
-        public Nullable<int> ESTADO { get; set; }
-        public Nullable<System.DateTime> INICIO { get; set; }
-        public Nullable<System.DateTime> FIM { get; set; }
 
-        public virtual ICollection<Aluno_Efectividade> Aluno_Efectividade { get; set; }
-        public virtual ICollection<AnoLectivo> AnoLectivo { get; set; }
+        [Display(Name = "Código")]
+        [StringLength(50)]
+        [Required]
+        public string codigo { get; set; }
+
+        [Display(Name = "Nome Completo")]
+        [StringLength(100)]
+        [Required]
+        public string nome { get; set; }
+
+        [Display(Name = "Apelido")]
+        [StringLength(100)]
+        [Required]
+        public string apelido { get; set; }
+
+        [Display(Name="Morada")]
+        [StringLength(100)]
+        [Required]
+        public string morada { get; set; }
+
+        [Display(Name = "Localidade")]
+        [StringLength(50)]
+        public string localidade { get; set; }
+
+        [Display(Name = "NIB")]
+        [StringLength(20)]
+        public string nib { get; set; }
+
+        [Display(Name = "Documento Identificação")]
+        [StringLength(50)]
+        public string documentoIdentificacao { get; set; }
+
+        [Display(Name = "Número Documento")]
+        [StringLength(50)]
+        public string numeroDocumento { get; set; }
+
+        [Display(Name = "Validade Documento")]
+        [DataType(DataType.Date)]
+        public DateTime validadeDocumento { get; set; }
+
+        [Display(Name = "Telefone")]
+        [StringLength(50)]
+        public string telefone { get; set; }
+
+        [Display(Name = "Celular")]
+        [StringLength(50)]
+        public string celular { get; set; }
+
+        [Display(Name = "Nacionalidade")]
+        [Required]
+        public string nacionalidade { get; set; }
+
+        [Display(Name = "Data de Nascimento")]
+        [DataType(DataType.Date)]
+        [Required]
+        public DateTime dataNascimento { get; set; }
+
+        [Display(Name = "Local de Nascimento")]
+        [Required]
+        public string localNascimento { get; set; }
+
+        [Display(Name = "Sexo")]
+        [Required]
+        public bool sexo { get; set; }
+
+        [Display(Name = "Nome Pai")]
+        [StringLength(100)]
+        public string nomePai { get; set; }
+
+        [Display(Name = "Tel. Pai")]
+        [StringLength(50)]
+        public string telefonePai { get; set; }
+
+        [Display(Name = "Email Pai")]
+        [StringLength(50)]
+        public string emailPai { get; set; }
+
+        [Display(Name = "Nome Mãe")]
+        [StringLength(100)]
+        public string nomeMae { get; set; }
+
+        [Display(Name = "Tel. Mãe")]
+        [StringLength(50)]
+        public string telefoneMãe { get; set; }
+
+        [Display(Name = "Email Mãe")]
+        [StringLength(50)]
+        public string emailMae { get; set; }
+
+        [Display(Name = "Nome Enc.")]
+        [StringLength(100)]
+        public string nomeEncarregado { get; set; }
+
+        [Display(Name = "Tel. Enc.")]
+        [StringLength(50)]
+        public string telefoneEncarregado { get; set; }
+
+        [Display(Name = "Email Enc.")]
+        [StringLength(50)]
+        public string emailEncarregado { get; set; }
+
+        
     }
+
+    //public partial class AlunoAnoLectivo
+    //{
+    //    [Key]
+    //    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    //    public int id { get; set; }
+    //    public decimal Id_Aluno { get; set; }
+    //    public decimal Id_AnoLectivo { get; set; }
+    //    public Nullable<decimal> Id_Turma { get; set; }
+
+    //    public virtual AnoLectivo AnoLectivo { get; set; }
+    //    public virtual Aluno Aluno { get; set; }
+    //    public virtual Turmas Turmas { get; set; }
+    //}
 
     public partial class TabelaHorarios
     {

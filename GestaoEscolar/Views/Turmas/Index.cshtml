@@ -1,0 +1,47 @@
+﻿@model IEnumerable<GestaoEscolar.Models.Turmas>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Lista de Turmas</h2>
+
+<p>
+    <a asp-action="Create">Criar Novo</a>
+</p>
+<table>
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.desc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Classe)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.desc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Classe.desc)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.id"><i class="material-icons left">mode_edit</i></a>
+                    <a asp-action="Details" asp-route-id="@item.id"> <i class="material-icons left">chrome_reader_mode</i></a>
+                    <a asp-action="Delete" asp-route-id="@item.id" red><i class="material-icons left">delete</i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a asp-controller="Definicoes" asp-action="Index">Voltar as Definições</a>
+</div>

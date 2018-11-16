@@ -1,0 +1,52 @@
+﻿@model GestaoEscolar.Models.AnoLectivo
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Apagar</h2>
+
+<h3>Deseja continuar?</h3>
+<div>
+    <h4>AnoLectivo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.codigo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.codigo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.desc)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.desc)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.dataInicio)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.dataInicio)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.dataFim)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.dataFim)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Ano)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Ano.id)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="id" />
+        <input type="submit" value="Apagar" class="btn btn-default" /> |
+        <a asp-action="Index">Voltar</a>
+    </form>
+</div>

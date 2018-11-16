@@ -1,0 +1,34 @@
+﻿@model GestaoEscolar.Models.Turmas
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Apagar</h2>
+
+<h3>Tem a certeza que deseja apagar?</h3>
+<div>
+    <h4>Turmas</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.desc)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.desc)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Classe)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Classe.id)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="id" />
+        <input type="submit" value="Apagar" class="btn btn-default" /> |
+        <a asp-action="Index">Voltar</a>
+    </form>
+</div>

@@ -1,23 +1,32 @@
-﻿@model IEnumerable<GestaoEscolar.Models.Classe>
+﻿@model IEnumerable<GestaoEscolar.Models.AnoLectivo>
 
 @{
-    ViewData["Title"] = "Listagem";
+    ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Lista de Classes</h2>
+<h2>Lista de Anos Lectivos</h2>
 
 <p>
-    <a asp-action="Create">Criar Nova</a>
+    <a asp-action="Create">Criar Novo</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.codigo)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.desc)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Nivel)
+                @Html.DisplayNameFor(model => model.dataInicio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dataFim)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ano)
             </th>
             <th></th>
         </tr>
@@ -26,10 +35,19 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.codigo)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.desc)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Nivel.codigo)
+                @Html.DisplayFor(modelItem => item.dataInicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dataFim)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ano.desc)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.id"><i class="material-icons left">mode_edit</i></a>

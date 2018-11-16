@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestaoEscolar.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181112221033_initial")]
-    partial class initial
+    [Migration("20181114172843_addAluno")]
+    partial class addAluno
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,106 +23,113 @@ namespace GestaoEscolar.Migrations
 
             modelBuilder.Entity("GestaoEscolar.Models.Aluno", b =>
                 {
-                    b.Property<decimal>("id");
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("celular");
+                    b.Property<string>("apelido")
+                        .IsRequired()
+                        .HasMaxLength(100);
 
-                    b.Property<string>("codigo");
+                    b.Property<string>("celular")
+                        .HasMaxLength(50);
 
-                    b.Property<DateTime>("dataAniversario");
+                    b.Property<string>("codigo")
+                        .IsRequired()
+                        .HasMaxLength(50);
 
-                    b.Property<string>("localNascimento");
+                    b.Property<DateTime>("dataNascimento");
 
-                    b.Property<string>("morada");
+                    b.Property<string>("documentoIdentificacao")
+                        .HasMaxLength(50);
 
-                    b.Property<string>("nome");
+                    b.Property<string>("emailEncarregado")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("emailMae")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("emailPai")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("localNascimento")
+                        .IsRequired();
+
+                    b.Property<string>("localidade")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("morada")
+                        .IsRequired()
+                        .HasMaxLength(100);
+
+                    b.Property<string>("nacionalidade")
+                        .IsRequired();
+
+                    b.Property<string>("nib")
+                        .HasMaxLength(20);
+
+                    b.Property<string>("nome")
+                        .IsRequired()
+                        .HasMaxLength(100);
+
+                    b.Property<string>("nomeEncarregado")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("nomeMae")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("nomePai")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("numeroDocumento")
+                        .HasMaxLength(50);
 
                     b.Property<bool>("sexo");
 
-                    b.Property<string>("telefone");
+                    b.Property<string>("telefone")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("telefoneEncarregado")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("telefoneMãe")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("telefonePai")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("validadeDocumento");
 
                     b.HasKey("id");
 
                     b.ToTable("Aluno");
                 });
 
-            modelBuilder.Entity("GestaoEscolar.Models.Aluno_Efectividade", b =>
+            modelBuilder.Entity("GestaoEscolar.Models.AnoLectivo", b =>
                 {
-                    b.Property<decimal>("Id");
-
-                    b.Property<decimal?>("Aluno_Id");
-
-                    b.Property<decimal?>("Alunoid");
-
-                    b.Property<decimal?>("Ano_Id");
-
-                    b.Property<int?>("Anoid");
-
-                    b.Property<decimal?>("Classe_Id");
-
-                    b.Property<decimal?>("Dia");
-
-                    b.Property<int?>("Mes");
-
-                    b.Property<string>("Objservacao");
-
-                    b.Property<int?>("Presenca");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Alunoid");
-
-                    b.HasIndex("Anoid");
-
-                    b.ToTable("Aluno_Efectividade");
-                });
-
-            modelBuilder.Entity("GestaoEscolar.Models.AlunoAnoLectivo", b =>
-                {
-                    b.Property<int>("Id")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<decimal?>("Alunoid");
-
-                    b.Property<decimal?>("AnoLectivoID");
-
-                    b.Property<decimal>("Id_Aluno");
-
-                    b.Property<decimal>("Id_AnoLectivo");
-
-                    b.Property<decimal?>("Id_Turma");
-
-                    b.Property<int?>("Turmasid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Alunoid");
-
-                    b.HasIndex("AnoLectivoID");
-
-                    b.HasIndex("Turmasid");
-
-                    b.ToTable("AlunoAnoLectivo");
-                });
-
-            modelBuilder.Entity("GestaoEscolar.Models.AnoLectivo", b =>
-                {
-                    b.Property<decimal>("ID");
-
-                    b.Property<decimal?>("Ano_Id");
-
-                    b.Property<int?>("Anosid");
-
-                    b.Property<decimal?>("Classe_Id");
-
                     b.Property<int?>("Classeid");
 
-                    b.HasKey("ID");
+                    b.Property<int>("anoId");
 
-                    b.HasIndex("Anosid");
+                    b.Property<string>("codigo")
+                        .HasMaxLength(20);
+
+                    b.Property<DateTime>("dataFim");
+
+                    b.Property<DateTime>("dataInicio");
+
+                    b.Property<string>("desc")
+                        .HasMaxLength(20);
+
+                    b.HasKey("id");
 
                     b.HasIndex("Classeid");
+
+                    b.HasIndex("anoId");
 
                     b.ToTable("AnoLectivo");
                 });
@@ -133,13 +140,17 @@ namespace GestaoEscolar.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ESTADO");
+                    b.Property<int>("ano");
 
-                    b.Property<DateTime?>("FIM");
+                    b.Property<string>("desc")
+                        .HasMaxLength(20);
 
-                    b.Property<DateTime?>("INICIO");
+                    b.Property<string>("estado")
+                        .HasMaxLength(20);
 
-                    b.Property<decimal?>("ano");
+                    b.Property<DateTime>("fim");
+
+                    b.Property<DateTime>("inicio");
 
                     b.HasKey("id");
 
@@ -248,32 +259,11 @@ namespace GestaoEscolar.Migrations
                     b.ToTable("Nivel");
                 });
 
-            modelBuilder.Entity("GestaoEscolar.Models.TabelaHorarios", b =>
-                {
-                    b.Property<decimal>("ID");
-
-                    b.Property<string>("Entrada");
-
-                    b.Property<string>("Saida");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("TabelaHorarios");
-                });
-
             modelBuilder.Entity("GestaoEscolar.Models.Turmas", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<decimal?>("AnoLectivoID");
-
-                    b.Property<int?>("AnoLectivoId");
-
-                    b.Property<int?>("HorarioId");
-
-                    b.Property<decimal?>("TabelaHorariosID");
 
                     b.Property<int>("classeId");
 
@@ -281,10 +271,6 @@ namespace GestaoEscolar.Migrations
                         .HasMaxLength(20);
 
                     b.HasKey("id");
-
-                    b.HasIndex("AnoLectivoID");
-
-                    b.HasIndex("TabelaHorariosID");
 
                     b.HasIndex("classeId");
 
@@ -401,41 +387,16 @@ namespace GestaoEscolar.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("GestaoEscolar.Models.Aluno_Efectividade", b =>
-                {
-                    b.HasOne("GestaoEscolar.Models.Aluno", "Aluno")
-                        .WithMany()
-                        .HasForeignKey("Alunoid");
-
-                    b.HasOne("GestaoEscolar.Models.Anos", "Ano")
-                        .WithMany("Aluno_Efectividade")
-                        .HasForeignKey("Anoid");
-                });
-
-            modelBuilder.Entity("GestaoEscolar.Models.AlunoAnoLectivo", b =>
-                {
-                    b.HasOne("GestaoEscolar.Models.Aluno", "Aluno")
-                        .WithMany("AlunoAnoLectivo")
-                        .HasForeignKey("Alunoid");
-
-                    b.HasOne("GestaoEscolar.Models.AnoLectivo", "AnoLectivo")
-                        .WithMany("AlunoAnoLectivo")
-                        .HasForeignKey("AnoLectivoID");
-
-                    b.HasOne("GestaoEscolar.Models.Turmas", "Turmas")
-                        .WithMany("AlunoAnoLectivo")
-                        .HasForeignKey("Turmasid");
-                });
-
             modelBuilder.Entity("GestaoEscolar.Models.AnoLectivo", b =>
                 {
-                    b.HasOne("GestaoEscolar.Models.Anos", "Anos")
-                        .WithMany("AnoLectivo")
-                        .HasForeignKey("Anosid");
-
-                    b.HasOne("GestaoEscolar.Models.Classe", "Classe")
+                    b.HasOne("GestaoEscolar.Models.Classe")
                         .WithMany("AnoLectivo")
                         .HasForeignKey("Classeid");
+
+                    b.HasOne("GestaoEscolar.Models.Anos", "Ano")
+                        .WithMany("AnoLectivo")
+                        .HasForeignKey("anoId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("GestaoEscolar.Models.Classe", b =>
@@ -455,14 +416,6 @@ namespace GestaoEscolar.Migrations
 
             modelBuilder.Entity("GestaoEscolar.Models.Turmas", b =>
                 {
-                    b.HasOne("GestaoEscolar.Models.AnoLectivo", "AnoLectivo")
-                        .WithMany("Turmas")
-                        .HasForeignKey("AnoLectivoID");
-
-                    b.HasOne("GestaoEscolar.Models.TabelaHorarios", "TabelaHorarios")
-                        .WithMany("Turmas")
-                        .HasForeignKey("TabelaHorariosID");
-
                     b.HasOne("GestaoEscolar.Models.Classe", "Classe")
                         .WithMany()
                         .HasForeignKey("classeId")

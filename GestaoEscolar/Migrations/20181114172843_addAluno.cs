@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GestaoEscolar.Migrations
 {
-    public partial class initial : Migration
+    public partial class addAluno : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,15 +12,32 @@ namespace GestaoEscolar.Migrations
                 name: "Aluno",
                 columns: table => new
                 {
-                    id = table.Column<decimal>(nullable: false),
-                    codigo = table.Column<string>(nullable: true),
-                    nome = table.Column<string>(nullable: true),
-                    morada = table.Column<string>(nullable: true),
-                    telefone = table.Column<string>(nullable: true),
-                    celular = table.Column<string>(nullable: true),
-                    dataAniversario = table.Column<DateTime>(nullable: false),
-                    localNascimento = table.Column<string>(nullable: true),
-                    sexo = table.Column<bool>(nullable: false)
+                    id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    codigo = table.Column<string>(maxLength: 50, nullable: false),
+                    nome = table.Column<string>(maxLength: 100, nullable: false),
+                    apelido = table.Column<string>(maxLength: 100, nullable: false),
+                    morada = table.Column<string>(maxLength: 100, nullable: false),
+                    localidade = table.Column<string>(maxLength: 50, nullable: true),
+                    nib = table.Column<string>(maxLength: 20, nullable: true),
+                    documentoIdentificacao = table.Column<string>(maxLength: 50, nullable: true),
+                    numeroDocumento = table.Column<string>(maxLength: 50, nullable: true),
+                    validadeDocumento = table.Column<DateTime>(nullable: false),
+                    telefone = table.Column<string>(maxLength: 50, nullable: true),
+                    celular = table.Column<string>(maxLength: 50, nullable: true),
+                    nacionalidade = table.Column<string>(nullable: false),
+                    dataNascimento = table.Column<DateTime>(nullable: false),
+                    localNascimento = table.Column<string>(nullable: false),
+                    sexo = table.Column<bool>(nullable: false),
+                    nomePai = table.Column<string>(maxLength: 100, nullable: true),
+                    telefonePai = table.Column<string>(maxLength: 50, nullable: true),
+                    emailPai = table.Column<string>(maxLength: 50, nullable: true),
+                    nomeMae = table.Column<string>(maxLength: 100, nullable: true),
+                    telefoneMãe = table.Column<string>(maxLength: 50, nullable: true),
+                    emailMae = table.Column<string>(maxLength: 50, nullable: true),
+                    nomeEncarregado = table.Column<string>(maxLength: 100, nullable: true),
+                    telefoneEncarregado = table.Column<string>(maxLength: 50, nullable: true),
+                    emailEncarregado = table.Column<string>(maxLength: 50, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -33,10 +50,11 @@ namespace GestaoEscolar.Migrations
                 {
                     id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ano = table.Column<decimal>(nullable: true),
-                    ESTADO = table.Column<int>(nullable: true),
-                    INICIO = table.Column<DateTime>(nullable: true),
-                    FIM = table.Column<DateTime>(nullable: true)
+                    ano = table.Column<int>(nullable: false),
+                    desc = table.Column<string>(maxLength: 20, nullable: true),
+                    estado = table.Column<string>(maxLength: 20, nullable: true),
+                    inicio = table.Column<DateTime>(nullable: false),
+                    fim = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -92,51 +110,6 @@ namespace GestaoEscolar.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Nivel", x => x.codigo);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TabelaHorarios",
-                columns: table => new
-                {
-                    ID = table.Column<decimal>(nullable: false),
-                    Entrada = table.Column<string>(nullable: true),
-                    Saida = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TabelaHorarios", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Aluno_Efectividade",
-                columns: table => new
-                {
-                    Id = table.Column<decimal>(nullable: false),
-                    Mes = table.Column<int>(nullable: true),
-                    Dia = table.Column<decimal>(nullable: true),
-                    Presenca = table.Column<int>(nullable: true),
-                    Objservacao = table.Column<string>(nullable: true),
-                    Aluno_Id = table.Column<decimal>(nullable: true),
-                    Classe_Id = table.Column<decimal>(nullable: true),
-                    Ano_Id = table.Column<decimal>(nullable: true),
-                    Anoid = table.Column<int>(nullable: true),
-                    Alunoid = table.Column<decimal>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Aluno_Efectividade", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Aluno_Efectividade_Aluno_Alunoid",
-                        column: x => x.Alunoid,
-                        principalTable: "Aluno",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Aluno_Efectividade_Anos_Anoid",
-                        column: x => x.Anoid,
-                        principalTable: "Anos",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -269,27 +242,30 @@ namespace GestaoEscolar.Migrations
                 name: "AnoLectivo",
                 columns: table => new
                 {
-                    ID = table.Column<decimal>(nullable: false),
-                    Ano_Id = table.Column<decimal>(nullable: true),
-                    Classe_Id = table.Column<decimal>(nullable: true),
-                    Anosid = table.Column<int>(nullable: true),
+                    id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    codigo = table.Column<string>(maxLength: 20, nullable: true),
+                    desc = table.Column<string>(maxLength: 20, nullable: true),
+                    anoId = table.Column<int>(nullable: false),
+                    dataInicio = table.Column<DateTime>(nullable: false),
+                    dataFim = table.Column<DateTime>(nullable: false),
                     Classeid = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AnoLectivo", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_AnoLectivo_Anos_Anosid",
-                        column: x => x.Anosid,
-                        principalTable: "Anos",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
+                    table.PrimaryKey("PK_AnoLectivo", x => x.id);
                     table.ForeignKey(
                         name: "FK_AnoLectivo_Classe_Classeid",
                         column: x => x.Classeid,
                         principalTable: "Classe",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_AnoLectivo_Anos_anoId",
+                        column: x => x.anoId,
+                        principalTable: "Anos",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -319,27 +295,11 @@ namespace GestaoEscolar.Migrations
                     id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     desc = table.Column<string>(maxLength: 20, nullable: true),
-                    classeId = table.Column<int>(nullable: false),
-                    AnoLectivoId = table.Column<int>(nullable: true),
-                    HorarioId = table.Column<int>(nullable: true),
-                    AnoLectivoID = table.Column<decimal>(nullable: true),
-                    TabelaHorariosID = table.Column<decimal>(nullable: true)
+                    classeId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Turmas", x => x.id);
-                    table.ForeignKey(
-                        name: "FK_Turmas_AnoLectivo_AnoLectivoID",
-                        column: x => x.AnoLectivoID,
-                        principalTable: "AnoLectivo",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Turmas_TabelaHorarios_TabelaHorariosID",
-                        column: x => x.TabelaHorariosID,
-                        principalTable: "TabelaHorarios",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Turmas_Classe_classeId",
                         column: x => x.classeId,
@@ -348,76 +308,15 @@ namespace GestaoEscolar.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "AlunoAnoLectivo",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Id_Aluno = table.Column<decimal>(nullable: false),
-                    Id_AnoLectivo = table.Column<decimal>(nullable: false),
-                    Id_Turma = table.Column<decimal>(nullable: true),
-                    AnoLectivoID = table.Column<decimal>(nullable: true),
-                    Alunoid = table.Column<decimal>(nullable: true),
-                    Turmasid = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AlunoAnoLectivo", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AlunoAnoLectivo_Aluno_Alunoid",
-                        column: x => x.Alunoid,
-                        principalTable: "Aluno",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_AlunoAnoLectivo_AnoLectivo_AnoLectivoID",
-                        column: x => x.AnoLectivoID,
-                        principalTable: "AnoLectivo",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_AlunoAnoLectivo_Turmas_Turmasid",
-                        column: x => x.Turmasid,
-                        principalTable: "Turmas",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Aluno_Efectividade_Alunoid",
-                table: "Aluno_Efectividade",
-                column: "Alunoid");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Aluno_Efectividade_Anoid",
-                table: "Aluno_Efectividade",
-                column: "Anoid");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AlunoAnoLectivo_Alunoid",
-                table: "AlunoAnoLectivo",
-                column: "Alunoid");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AlunoAnoLectivo_AnoLectivoID",
-                table: "AlunoAnoLectivo",
-                column: "AnoLectivoID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AlunoAnoLectivo_Turmasid",
-                table: "AlunoAnoLectivo",
-                column: "Turmasid");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AnoLectivo_Anosid",
-                table: "AnoLectivo",
-                column: "Anosid");
-
             migrationBuilder.CreateIndex(
                 name: "IX_AnoLectivo_Classeid",
                 table: "AnoLectivo",
                 column: "Classeid");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AnoLectivo_anoId",
+                table: "AnoLectivo",
+                column: "anoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -469,16 +368,6 @@ namespace GestaoEscolar.Migrations
                 column: "classe_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Turmas_AnoLectivoID",
-                table: "Turmas",
-                column: "AnoLectivoID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Turmas_TabelaHorariosID",
-                table: "Turmas",
-                column: "TabelaHorariosID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Turmas_classeId",
                 table: "Turmas",
                 column: "classeId");
@@ -487,10 +376,10 @@ namespace GestaoEscolar.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Aluno_Efectividade");
+                name: "Aluno");
 
             migrationBuilder.DropTable(
-                name: "AlunoAnoLectivo");
+                name: "AnoLectivo");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
@@ -511,25 +400,16 @@ namespace GestaoEscolar.Migrations
                 name: "Disciplina");
 
             migrationBuilder.DropTable(
-                name: "Aluno");
+                name: "Turmas");
 
             migrationBuilder.DropTable(
-                name: "Turmas");
+                name: "Anos");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "AnoLectivo");
-
-            migrationBuilder.DropTable(
-                name: "TabelaHorarios");
-
-            migrationBuilder.DropTable(
-                name: "Anos");
 
             migrationBuilder.DropTable(
                 name: "Classe");

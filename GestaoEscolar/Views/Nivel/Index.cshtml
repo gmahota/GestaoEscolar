@@ -26,9 +26,9 @@
                 @Html.DisplayFor(modelItem => item.desc)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.codigo">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.codigo">Detalhes</a> |
-                <a asp-action="Delete" asp-route-id="@item.codigo">Apagar</a>
+                <a asp-action="Edit" asp-route-id="@item.codigo"><i class="material-icons left">mode_edit</i></a>
+                <a asp-action="Details" asp-route-id="@item.codigo"> <i class="material-icons left">chrome_reader_mode</i></a>
+                <a asp-action="Delete" asp-route-id="@item.codigo" red><i class="material-icons left">delete</i></a>
             </td>
         </tr>
 }

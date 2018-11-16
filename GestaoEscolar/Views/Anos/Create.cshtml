@@ -1,0 +1,51 @@
+﻿@model GestaoEscolar.Models.Anos
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Criação</h2>
+
+<h4>Anos</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ano" class="control-label"></label>
+                <input asp-for="ano" class="form-control" />
+                <span asp-validation-for="ano" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="desc" class="control-label"></label>
+                <input asp-for="desc" class="form-control" />
+                <span asp-validation-for="desc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="estado" class="control-label"></label>
+                <input asp-for="estado" class="form-control" />
+                <span asp-validation-for="estado" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="inicio" class="control-label"></label>
+                <input asp-for="inicio" class="form-control" />
+                <span asp-validation-for="inicio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="fim" class="control-label"></label>
+                <input asp-for="fim" class="form-control" />
+                <span asp-validation-for="fim" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Criar" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

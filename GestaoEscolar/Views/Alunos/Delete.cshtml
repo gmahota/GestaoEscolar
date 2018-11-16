@@ -1,0 +1,166 @@
+﻿@model GestaoEscolar.Models.Aluno
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Apagar</h2>
+
+<h3>Deseja Apagar?</h3>
+<div>
+    <h4>Aluno</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.codigo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.codigo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.nome)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.nome)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.apelido)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.apelido)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.morada)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.morada)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.localidade)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.localidade)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.nib)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.nib)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.documentoIdentificacao)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.documentoIdentificacao)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.numeroDocumento)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.numeroDocumento)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.validadeDocumento)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.validadeDocumento)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.telefone)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.telefone)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.celular)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.celular)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.nacionalidade)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.nacionalidade)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.dataNascimento)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.dataNascimento)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.localNascimento)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.localNascimento)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.sexo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.sexo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.nomePai)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.nomePai)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.telefonePai)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.telefonePai)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.emailPai)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.emailPai)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.nomeMae)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.nomeMae)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.telefoneMãe)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.telefoneMãe)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.emailMae)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.emailMae)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.nomeEncarregado)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.nomeEncarregado)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.telefoneEncarregado)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.telefoneEncarregado)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.emailEncarregado)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.emailEncarregado)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="id" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>
